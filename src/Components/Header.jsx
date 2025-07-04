@@ -3,22 +3,21 @@ import { post } from "../../post.json";
 import PostCard from "./PostCard";
 console.log("🚀 ~ post:", post);
 
-const Header = () => {
+const Header = ({ setFilteredBlog }) => {
   const [input, setInput] = useState("");
   console.log("🚀 ~ Header ~ input:", input);
 
-  const [posts, setposts] = useState([]);
-  console.log("🚀 ~ Header ~ posts:", posts);
-
   const handleClick = () => {
-    // if(post.map((item)=>item.author === input)){
-    //   console.log("success")
-    // }
-    
-
-    const query = post.filter((item)=>item.author === input?{...posts,item}:item)
-    console.log("🚀 ~ handleClick ~ query:", query)
-    setposts(query)
+    const query = post.filter((item) => {
+      const lowerInput = input.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(lowerInput) ||
+        item.body.toLowerCase().includes(lowerInput) ||
+        item.author.name.toLowerCase().includes(lowerInput)
+      );
+    });
+    console.log("🚀 ~ handleClick ~ query:", query);
+    setFilteredBlog(query);
   };
 
   return (
@@ -39,7 +38,6 @@ const Header = () => {
         >
           Search
         </button>
-      
       </div>
     </div>
   );
