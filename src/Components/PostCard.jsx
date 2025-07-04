@@ -1,20 +1,20 @@
-import React,{useNavigate} from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const PostCard = ({ item }) => {
-//   console.log("🚀 ~ PostCard ~ item:", item.author)
-//   const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleClick =()=>{
-    // navigate(`/${item.author}/${item.author.name}`)
+    navigate(`/author/${item.author.name}`)
   }
   return (
     <>
-      <div className="card w-25 mb-3" onClick={handleClick}>
-        <p className="card-header">{item.title}</p>
-        <p className="card-body">{item.body}</p>
-        <p className="card-description">{item.tags}</p>
-        <p className="">{item.author.name}</p>
+      <div className="card w-25 m-3" onClick={handleClick}>
+        <p className="card-header"><span className="font-weight-bold">Title: </span>{item.title}</p>
+        <p className="card-body"><span className="font-weight-bold">Description: </span>{item.body}</p>
+        <p className="card-body"><span className="font-weight-bold">Tags: </span>#{item.tags}</p>
+        <p className="text-primary card-body" style={{cursor:"pointer"}} onClick={handleClick}><span className="font-weight-bold">Author Name: </span>{item.author.name}</p>
       </div>
     </>
   );
